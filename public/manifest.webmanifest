@@ -1,0 +1,25 @@
+{
+  "name": "ERP Dashboard",
+  "short_name": "ERP",
+  "description": "لوحة إدارة عروض الأسعار والإنتاج كتجربة تطبيق موبايل حديثة.",
+  "start_url": "/admin/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#152241",
+  "theme_color": "#5f63f2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/app-icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

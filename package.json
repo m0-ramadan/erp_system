@@ -1,0 +1,22 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lan": "php artisan serve --host=0.0.0.0 --port=8001",
+        "cap:sync": "npx cap sync",
+        "cap:android:add": "npx cap add android",
+        "cap:android:open": "npx cap open android",
+        "cap:android:copy": "npx cap copy android"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.2",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@capacitor/android": "^8.3.4",
+        "@capacitor/cli": "^7.6.5",
+        "@capacitor/core": "^8.3.4"
+    }
+}
