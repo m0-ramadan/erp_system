@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"Tests\\Feature\\AdminUserRoleAccessTest::test_user_without_role_cannot_access_admin_dashboard":0.06,"Tests\\Feature\\AdminUserRoleAccessTest::test_assigning_admin_role_restores_dashboard_access":0.031}}

@@ -7,6 +7,5 @@
 @endsection
 
 @section('content')
-    @php($resourceKey = 'users')
-    @include('Admin._components.resource-form')
+    @include('Admin.users._form')
 @endsection
