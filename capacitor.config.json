@@ -1,11 +1,9 @@
 {
-  "appId": "com.erp.dashboard",
-  "appName": "ERP Dashboard",
+  "appId": "com.stackmind.erp",
+  "appName": "ERP System",
   "webDir": "public",
-  "bundledWebRuntime": false,
   "server": {
-    "url": "http://192.168.8.230:8001",
-    "cleartext": true,
-    "androidScheme": "http"
+    "url": "https://erp.stackmind.org",
+    "cleartext": false
   }
 }

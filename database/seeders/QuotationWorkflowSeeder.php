@@ -12,16 +12,39 @@ class QuotationWorkflowSeeder extends Seeder
         $this->call(DepartmentsAndRolesSeeder::class);
 
         DB::table('currencies')->insertOrIgnore([
-            ['code' => 'EGP', 'name' => 'Egyptian Pound', 'symbol' => 'ج.م', 'exchange_rate_to_base' => 1, 'is_base' => true],
-            ['code' => 'SAR', 'name' => 'Saudi Riyal', 'symbol' => 'SAR', 'exchange_rate_to_base' => 1],
-            ['code' => 'USD', 'name' => 'US Dollar', 'symbol' => '$', 'exchange_rate_to_base' => 1],
+            [
+                'code' => 'EGP',
+                'exchange_rate_to_base' => 1,
+                'is_base' => 1,
+                'name' => 'Egyptian Pound',
+                'symbol' => 'ج.م',
+            ],
+            [
+                'code' => 'SAR',
+                'exchange_rate_to_base' => 1,
+                'is_base' => 0,
+                'name' => 'Saudi Riyal',
+                'symbol' => 'SAR',
+            ],
+            [
+                'code' => 'USD',
+                'exchange_rate_to_base' => 1,
+                'is_base' => 0,
+                'name' => 'US Dollar',
+                'symbol' => '$',
+            ],
         ]);
 
         DB::table('payment_terms')->insertOrIgnore([
             ['code' => 'CASH', 'name' => 'Cash', 'description' => 'Immediate payment', 'days_count' => 0],
             ['code' => 'NET15', 'name' => 'Net 15', 'description' => 'Payment due within 15 days', 'days_count' => 15],
             ['code' => 'NET30', 'name' => 'Net 30', 'description' => 'Payment due within 30 days', 'days_count' => 30],
-            ['code' => 'ADVANCE_50', 'name' => '50% Advance', 'description' => '50% advance payment and balance on delivery'],
+            [
+                'code' => 'ADVANCE_50',
+                'name' => '50% Advance',
+                'description' => '50% advance payment and balance on delivery',
+                'days_count' => 0
+            ],
         ]);
 
         DB::table('file_types')->insertOrIgnore([
