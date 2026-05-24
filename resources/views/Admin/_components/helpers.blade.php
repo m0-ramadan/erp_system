@@ -28,6 +28,40 @@
         $value = data_get($item, $field);
         if (($config['type'] ?? null) === 'boolean') return $value ? 'نعم' : 'لا';
         if ($value instanceof \Carbon\CarbonInterface) return $value->format(str_contains($field, '_date') ? 'Y-m-d' : 'Y-m-d H:i');
+        
+        if (($config['type'] ?? null) === 'relation' && $item instanceof \Illuminate\Database\Eloquent\Model) {
+            $cleaned = preg_replace('/_id$/', '', $field);
+            $guesses = [];
+            
+            $overrides = [
+                'manager_user_id' => 'manager',
+                'created_by' => 'creator',
+                'updated_by' => 'updater',
+            ];
+            
+            if (isset($overrides[$field])) {
+                $guesses[] = $overrides[$field];
+            }
+            $guesses[] = \Illuminate\Support\Str::camel($cleaned);
+            $guesses[] = $cleaned;
+            if ($cleaned === 'manager_user') {
+                $guesses[] = 'manager';
+            }
+            
+            foreach ($guesses as $g) {
+                try {
+                    if (method_exists($item, $g) || $item->relationLoaded($g) || isset($item->$g)) {
+                        $related = $item->$g;
+                        if ($related) {
+                            $optLabel = $config['option_label'] ?? 'name';
+                            $res = data_get($related, $optLabel);
+                            if ($res) return $res;
+                        }
+                    }
+                } catch (\Throwable $e) {}
+            }
+        }
+        
         return $qwHuman($value);
     };
 @endphp

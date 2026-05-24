@@ -34,7 +34,7 @@
                 <div class="qw-form-grid">
                     <div>
                         <label class="qw-label" for="employee_code">كود الموظف</label>
-                        <input id="employee_code" name="employee_code" type="text" value="{{ old('employee_code', $item->employee_code ?? '') }}" class="form-control qw-input">
+                        <input id="employee_code" name="employee_code" type="text" value="{{ old('employee_code', $item->employee_code ?? '') }}" class="form-control qw-input" placeholder="تلقائي..." readonly>
                         @error('employee_code')<small class="text-danger d-block mt-1">{{ $message }}</small>@enderror
                     </div>
 

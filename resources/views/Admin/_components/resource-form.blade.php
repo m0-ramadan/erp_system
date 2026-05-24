@@ -98,7 +98,16 @@
                                     <div class="app-file-name" data-file-name></div>
                                 </div>
                             @else
-                                <input id="field_{{ $field }}" name="{{ $field }}" type="{{ $type === 'datetime' ? 'datetime-local' : $type }}" value="{{ $value }}" class="form-control qw-input" @if($type === 'number') step="any" @endif>
+                                <input 
+                                    id="field_{{ $field }}" 
+                                    name="{{ $field }}" 
+                                    type="{{ $type === 'datetime' ? 'datetime-local' : $type }}" 
+                                    value="{{ $value }}" 
+                                    class="form-control qw-input" 
+                                    @if($type === 'number') step="any" @endif
+                                    @if(isset($fc['readonly']) && $fc['readonly']) readonly @endif
+                                    @if(isset($fc['placeholder'])) placeholder="{{ $fc['placeholder'] }}" @endif
+                                >
                             @endif
                             @error($field)<small class="text-danger d-block mt-1">{{ $message }}</small>@enderror
                         </div>

@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             QuotationWorkflowSeeder::class,
             DepartmentsAndRolesSeeder::class,
-
+            AdminUserSeeder::class,
+            WorkflowInstanceSeeder::class,
         ]);
     }
 }

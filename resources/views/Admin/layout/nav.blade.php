@@ -32,6 +32,11 @@
                     </a>
                 </li>
             @endif
+            <li class="nav-item me-2">
+                <a class="nav-link theme-toggle-btn" href="javascript:void(0);" onclick="toggleThemeMode()" title="تبديل المظهر">
+                    <i class="ti ti-moon ti-md"></i>
+                </a>
+            </li>
             @permission('notifications.access')
                 <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-2">
                     <a class="nav-link dropdown-toggle hide-arrow" href="{{ Route::has('admin.notifications.index') ? route('admin.notifications.index') : '#' }}">

@@ -38,6 +38,37 @@ use Laravel\Sanctum\HasApiTokens;
         'email_verified_at' => 'datetime'
         ];
 
+        protected static function booted()
+        {
+            static::creating(function ($user) {
+                if (empty($user->employee_code)) {
+                    $prefix = 'EMP';
+                    if ($user->department_id) {
+                        $deptCode = \App\Models\Department::where('id', $user->department_id)->value('code');
+                        $prefix = match ($deptCode) {
+                            'SETUP' => 'ADM',
+                            'SALES' => 'REP',
+                            'DESIGN' => 'DSN',
+                            'ESTIMATION' => 'EST',
+                            'ACCOUNTS' => 'ACC',
+                            'MANAGEMENT' => 'MGR',
+                            'PRODUCTION' => 'PRD',
+                            'SYSTEM' => 'SYS',
+                            default => 'EMP',
+                        };
+                    }
+
+                    $nextId = (\App\Models\User::max('id') ?? 0) + 1;
+                    do {
+                        $code = sprintf('%s-%04d', $prefix, $nextId);
+                        $nextId++;
+                    } while (\App\Models\User::where('employee_code', $code)->exists());
+
+                    $user->employee_code = $code;
+                }
+            });
+        }
+
     public function department()
     {
         return $this->belongsTo(Department::class);

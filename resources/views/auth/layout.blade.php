@@ -3,6 +3,16 @@
 
 <head>
     <meta charset="utf-8">
+    <script>
+        (function() {
+            const templateName = 'vertical-menu-template-no-customizer';
+            let style = localStorage.getItem('templateCustomizer-' + templateName + '--Style');
+            if (!style || style === 'system') {
+                style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.className = style + '-style';
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'ERP')</title>
@@ -23,6 +33,36 @@
             --danger-soft: rgba(220, 53, 69, 0.12);
         }
 
+        .light-style {
+            --bg: #faf6f0;
+            --panel: rgba(255, 255, 255, 0.88);
+            --line: rgba(44, 48, 56, 0.08);
+            --text: #2c3038;
+            --muted: #7a828a;
+            --accent: #f19022;
+            --accent-dark: #d8760e;
+            --accent-soft: rgba(241, 144, 34, 0.12);
+            --success-soft: rgba(40, 199, 111, 0.12);
+            --danger-soft: rgba(234, 84, 85, 0.12);
+            --accent-gradient: linear-gradient(135deg, #f19022, #fbc875);
+            --accent-shadow: rgba(241, 144, 34, 0.2);
+        }
+
+        .dark-style {
+            --bg: #152241;
+            --panel: rgba(25, 38, 66, 0.86);
+            --line: rgba(255, 255, 255, 0.08);
+            --text: #ffffff;
+            --muted: rgba(255, 255, 255, 0.7);
+            --accent: #ee9b00;
+            --accent-dark: #d98a00;
+            --accent-soft: rgba(238, 155, 0, 0.15);
+            --success-soft: rgba(25, 135, 84, 0.15);
+            --danger-soft: rgba(220, 53, 69, 0.15);
+            --accent-gradient: linear-gradient(135deg, #ee9b00, #bb3e03);
+            --accent-shadow: rgba(238, 155, 0, 0.25);
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -32,10 +72,21 @@
             min-height: 100vh;
             font-family: "Cairo", sans-serif;
             color: var(--text);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .light-style body {
             background:
-                radial-gradient(circle at top right, rgba(187, 62, 3, 0.18), transparent 28%),
-                radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.16), transparent 26%),
-                linear-gradient(135deg, #f8f4ec 0%, #efe6d7 100%);
+                radial-gradient(circle at top right, rgba(241, 144, 34, 0.15), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.1), transparent 26%),
+                linear-gradient(135deg, #fdfbf7 0%, #faf6f0 100%);
+        }
+
+        .dark-style body {
+            background:
+                radial-gradient(circle at top right, rgba(187, 62, 3, 0.15), transparent 28%),
+                radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.12), transparent 26%),
+                linear-gradient(135deg, #152241 0%, #0c1426 100%);
         }
 
         .auth-shell {
@@ -60,6 +111,7 @@
             backdrop-filter: blur(14px);
             box-shadow: 0 24px 60px rgba(21, 32, 51, 0.12);
             padding: 32px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .brand {
@@ -69,11 +121,11 @@
             width: 58px;
             height: 58px;
             border-radius: 18px;
-            background: linear-gradient(135deg, #bb3e03, #ee9b00);
+            background: var(--accent-gradient);
             color: #fff;
             font-size: 24px;
             font-weight: 800;
-            box-shadow: 0 14px 30px rgba(187, 62, 3, 0.22);
+            box-shadow: 0 14px 30px var(--accent-shadow);
         }
 
         h1 {
@@ -86,6 +138,7 @@
             margin: 0 0 26px;
             color: var(--muted);
             line-height: 1.8;
+            transition: color 0.3s ease;
         }
 
         .field {
@@ -102,21 +155,32 @@
         input,
         select {
             width: 100%;
-            border: 1px solid rgba(21, 32, 51, 0.1);
+            border: 1px solid var(--line);
             background: rgba(255, 255, 255, 0.9);
             border-radius: 16px;
             min-height: 52px;
             padding: 0 16px;
             font: inherit;
             color: inherit;
-            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+            transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease, background-color .2s ease, color .2s ease;
+        }
+
+        .light-style input, .light-style select {
+            color: #2c3038;
+        }
+
+        .dark-style input,
+        .dark-style select {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
         }
 
         input:focus,
         select:focus {
             outline: none;
-            border-color: rgba(187, 62, 3, 0.35);
-            box-shadow: 0 0 0 4px rgba(187, 62, 3, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-soft);
             transform: translateY(-1px);
         }
 
@@ -135,11 +199,17 @@
 
         .alert-success {
             background: var(--success-soft);
+            color: #28c76f;
+        }
+        .light-style .alert-success {
             color: #13653e;
         }
 
         .alert-error {
             background: var(--danger-soft);
+            color: #ea5455;
+        }
+        .light-style .alert-error {
             color: #a52834;
         }
 
@@ -151,13 +221,18 @@
             font: inherit;
             font-weight: 800;
             color: #fff;
-            background: linear-gradient(135deg, var(--accent), #ee9b00);
-            box-shadow: 0 18px 35px rgba(187, 62, 3, 0.2);
+            background: var(--accent-gradient);
+            box-shadow: 0 18px 35px var(--accent-shadow);
             cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
         .button:hover {
-            background: linear-gradient(135deg, var(--accent-dark), #d98a00);
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+        .button:active {
+            transform: translateY(1px);
         }
 
         .links {
@@ -168,9 +243,14 @@
         }
 
         .links a {
-            color: var(--accent-dark);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 700;
+            transition: color 0.2s ease;
+        }
+        .links a:hover {
+            color: var(--accent-dark);
+            text-decoration: underline;
         }
 
         .hero {
@@ -256,8 +336,41 @@
             margin: 10px 0 0;
             padding: 0;
             list-style: none;
-            color: #a52834;
+            color: #ea5455;
             font-size: 13px;
+        }
+        .light-style .errors {
+            color: #a52834;
+        }
+
+        /* Floating glassmorphic theme switch button */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.08) rotate(8deg);
+        }
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+        .theme-toggle-svg {
+            width: 22px;
+            height: 22px;
         }
 
         @media (max-width: 980px) {
@@ -280,12 +393,17 @@
             .auth-panel {
                 max-width: 560px;
             }
+            .theme-toggle-btn {
+                top: 16px;
+                left: 16px;
+            }
         }
     </style>
     @yield('head')
 </head>
 
 <body>
+    <button class="theme-toggle-btn" onclick="toggleThemeMode()" aria-label="تبديل المظهر"></button>
     <div class="auth-shell">
         <section class="auth-card">
             <div class="auth-panel">
@@ -305,6 +423,51 @@
             </div>
         </aside>
     </div>
+
+    <script>
+        function toggleThemeMode() {
+            const templateName = 'vertical-menu-template-no-customizer';
+            const currentStyle = document.documentElement.classList.contains('dark-style') ? 'dark' : 'light';
+            const newStyle = currentStyle === 'dark' ? 'light' : 'dark';
+            
+            localStorage.setItem('templateCustomizer-' + templateName + '--Style', newStyle);
+            document.documentElement.className = newStyle + '-style';
+            
+            updateToggleIcon(newStyle);
+        }
+        
+        function updateToggleIcon(style) {
+            const btn = document.querySelector('.theme-toggle-btn');
+            if (!btn) return;
+            if (style === 'dark') {
+                btn.innerHTML = `<svg class="theme-toggle-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>`;
+            } else {
+                btn.innerHTML = `<svg class="theme-toggle-svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>`;
+            }
+        }
+        
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', function() {
+            const style = document.documentElement.classList.contains('dark-style') ? 'dark' : 'light';
+            updateToggleIcon(style);
+            
+            // Listen to real-time OS preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                const templateName = 'vertical-menu-template-no-customizer';
+                const savedStyle = localStorage.getItem('templateCustomizer-' + templateName + '--Style');
+                if (!savedStyle || savedStyle === 'system') {
+                    const style = e.matches ? 'dark' : 'light';
+                    document.documentElement.className = style + '-style';
+                    updateToggleIcon(style);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

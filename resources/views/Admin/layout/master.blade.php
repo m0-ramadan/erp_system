@@ -3,6 +3,18 @@
       data-theme="theme-default" data-assets-path="{{ asset('dashboard/assets') }}/"
       data-template="vertical-menu-template-no-customizer">
 <head>
+    <script>
+        (function() {
+            const templateName = 'vertical-menu-template-no-customizer';
+            let style = localStorage.getItem('templateCustomizer-' + templateName + '--Style');
+            if (!style || style === 'system') {
+                style = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.className = style + '-style layout-navbar-fixed layout-menu-fixed layout-compact';
+            document.documentElement.setAttribute('data-theme', 'theme-default');
+            document.documentElement.setAttribute('data-style', style);
+        })();
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -30,10 +42,10 @@
     </div>
 </div>
 
-<div class="app-page-loader" id="appPageLoader" aria-hidden="true">
+{{-- <div class="app-page-loader" id="appPageLoader" aria-hidden="true">
     <span class="dot"></span>
     <strong>جاري فتح الصفحة...</strong>
-</div>
+</div> --}}
 
 <div class="app-install-banner" id="appInstallBanner" aria-hidden="true">
     <div class="meta">

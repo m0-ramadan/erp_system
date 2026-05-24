@@ -1727,7 +1727,9 @@ $qwResourceMap = [
         'fields' => [
             'request_no' => [
                 'label' => 'رقم الطلب',
-                'type' => 'text'
+                'type' => 'text',
+                'readonly' => true,
+                'placeholder' => 'تلقائي...'
             ],
             'request_source' => [
                 'label' => 'مصدر الطلب',

@@ -76,6 +76,10 @@ class UserController extends AdminCrudController
     {
         $data = $this->prepareRoleSelection($data, $request);
 
+        if (empty($data['employee_code'])) {
+            $data['employee_code'] = null;
+        }
+
         if (! empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         }
@@ -148,5 +152,18 @@ class UserController extends AdminCrudController
                 ->get(['id', 'name']),
             'selectedRoleId' => $selectedRoleId,
         ];
+    }
+
+    protected function successResponse(Request $request, Model $item, string $message)
+    {
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'data' => $item,
+            ]);
+        }
+
+        return redirect()->route('admin.users.index')->with('success', $message);
     }
 }

@@ -1,26 +1,76 @@
 <style>
-    :root {
-        --app-bg: #f4f7fb;
-        --app-surface: rgba(255, 255, 255, 0.92);
+    .light-style {
+        --app-bg: #faf6f0;
+        --app-surface: rgba(255, 255, 255, 0.88);
         --app-surface-strong: #ffffff;
-        --app-line: rgba(19, 33, 68, 0.08);
-        --app-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+        --app-line: rgba(44, 48, 56, 0.08);
+        --app-shadow: 0 15px 35px rgba(44, 48, 56, 0.06);
         --app-nav-height: 86px;
-        --app-primary: #5f63f2;
-        --app-primary-2: #0ea5e9;
-        --app-accent: #f97316;
-        --app-text: #172033;
-        --app-muted: #6b7280;
+        --app-primary: #f19022;
+        --app-primary-2: #fbc875;
+        --app-accent: #f19022;
+        --app-text: #2c3038;
+        --app-muted: #7a828a;
+
+        /* Bootstrap & Sneat Theme Overrides */
+        --bs-primary: #f19022 !important;
+        --bs-primary-rgb: 241, 144, 34 !important;
+        --bs-primary-bg-subtle: rgba(241, 144, 34, 0.08) !important;
+        --bs-primary-border-subtle: rgba(241, 144, 34, 0.15) !important;
+        --bs-primary-hover: #d8760e !important;
+        --bs-primary-active: #c56807 !important;
+        --bs-primary-text-emphasis: #d8760e !important;
+        
+        --bs-body-bg: #faf6f0 !important;
+        --bs-body-color: #2c3038 !important;
+        --bs-card-bg: rgba(255, 255, 255, 0.88) !important;
+        
+        --bs-border-color: rgba(44, 48, 56, 0.08) !important;
+        --bs-border-color-translucent: rgba(44, 48, 56, 0.08) !important;
+        
+        --bs-link-color: #f19022 !important;
+        --bs-link-hover-color: #d8760e !important;
+        
+        --bs-heading-color: #2c3038 !important;
+        --bs-nav-link-color: #2c3038 !important;
+        --bs-nav-link-hover-color: #f19022 !important;
+    }
+
+    .dark-style {
+        --app-bg: #152241;
+        --app-surface: rgba(31, 53, 82, 0.88);
+        --app-surface-strong: #1f3552;
+        --app-line: rgba(255, 255, 255, 0.08);
+        --app-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        --app-nav-height: 86px;
+        --app-primary: #ee9b00;
+        --app-primary-2: #bb3e03;
+        --app-accent: #ee9b00;
+        --app-text: #ffffff;
+        --app-muted: rgba(255, 255, 255, 0.7);
     }
 
     html,
     body {
         min-height: 100%;
-        /* background:
-            radial-gradient(circle at top right, rgba(14, 165, 233, 0.12), transparent 24%),
-            radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.1), transparent 22%),
-            linear-gradient(180deg, #46566b 0%, #2a323b 100%); */
-        /* color: var(--app-text); */
+    }
+
+    html.light-style,
+    .light-style body {
+        background:
+            radial-gradient(circle at top right, rgba(241, 144, 34, 0.15), transparent 28%),
+            radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.1), transparent 26%),
+            linear-gradient(135deg, #fdfbf7 0%, #faf6f0 100%) !important;
+        color: var(--app-text) !important;
+    }
+
+    html.dark-style,
+    .dark-style body {
+        background:
+            radial-gradient(circle at top right, rgba(187, 62, 3, 0.15), transparent 28%),
+            radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.12), transparent 26%),
+            linear-gradient(135deg, #152241 0%, #0c1426 100%) !important;
+        color: var(--app-text) !important;
     }
 
     body {
@@ -45,14 +95,25 @@
         position: relative;
     }
 
-    .app-shell::before {
+    .light-style .app-shell::before {
         content: "";
         position: fixed;
         inset: 0;
         pointer-events: none;
         background:
-            radial-gradient(circle at 85% 10%, rgba(95, 99, 242, 0.07), transparent 25%),
-            radial-gradient(circle at 12% 88%, rgba(14, 165, 233, 0.08), transparent 18%);
+            radial-gradient(circle at 85% 10%, rgba(241, 144, 34, 0.06), transparent 25%),
+            radial-gradient(circle at 12% 88%, rgba(251, 200, 117, 0.05), transparent 18%);
+        z-index: 0;
+    }
+
+    .dark-style .app-shell::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(circle at 85% 10%, rgba(238, 155, 0, 0.08), transparent 25%),
+            radial-gradient(circle at 12% 88%, rgba(187, 62, 3, 0.08), transparent 18%);
         z-index: 0;
     }
 
@@ -65,10 +126,18 @@
 
     .layout-navbar {
         margin-top: 14px;
-        border: 1px solid rgba(255, 255, 255, 0.56);
         backdrop-filter: blur(18px);
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-        background: #342550bd !important;
+        box-shadow: var(--app-shadow) !important;
+    }
+
+    .light-style .layout-navbar {
+        border: 1px solid rgba(22, 35, 52, 0.08) !important;
+        background: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .dark-style .layout-navbar {
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        background: rgba(31, 53, 82, 0.8) !important;
     }
 
     .content-footer {
@@ -179,9 +248,21 @@
         gap: 12px;
         padding: 14px 16px;
         border-radius: 18px;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid var(--app-line);
-        box-shadow: var(--app-shadow);
+        background: rgba(52, 37, 80, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+        color: #fff;
+    }
+
+    @media (min-width: 1200px) {
+        .app-install-banner {
+            inset-inline: unset;
+            inset-inline-start: calc(260px + 1.5rem);
+            inset-inline-end: 1.5rem;
+            max-width: 1440px;
+            margin-inline: auto;
+        }
     }
 
     .app-install-banner.is-visible {
@@ -195,18 +276,29 @@
     .app-install-banner strong {
         display: block;
         font-size: 14px;
+        color: #ffffff;
     }
 
     .app-install-banner span {
         display: block;
         font-size: 12px;
-        color: var(--app-muted);
+        color: rgba(255, 255, 255, 0.78);
     }
 
     .app-install-banner .actions {
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+
+    .app-install-banner #appInstallDismiss {
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: #fff !important;
+        border: 0 !important;
+    }
+
+    .app-install-banner #appInstallDismiss:hover {
+        background: rgba(255, 255, 255, 0.25) !important;
     }
 
     .mobile-bottom-nav {
@@ -368,5 +460,324 @@
             transform: translateX(6px);
             opacity: .72;
         }
+    /* ERP Style Theme Overrides to Match Auth Pages */
+    
+    /* Primary buttons */
+    .btn-primary {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        border: 0 !important;
+        box-shadow: 0 4px 14px rgba(241, 144, 34, 0.25) !important;
+        color: #fff !important;
+        transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+        opacity: 0.95 !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 20px rgba(241, 144, 34, 0.35) !important;
+        background: linear-gradient(135deg, #d8760e, #f19022) !important;
+        color: #fff !important;
+    }
+    .btn-primary:active {
+        transform: translateY(1px) !important;
+    }
+    
+    .dark-style .btn-primary {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 4px 14px rgba(238, 155, 0, 0.25) !important;
+    }
+    .dark-style .btn-primary:hover, .dark-style .btn-primary:active, .dark-style .btn-primary:focus {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 6px 20px rgba(238, 155, 0, 0.35) !important;
+    }
+
+    /* Secondary and outline buttons */
+    .btn-outline-primary {
+        color: #f19022 !important;
+        border-color: #f19022 !important;
+        background: transparent !important;
+    }
+    .btn-outline-primary:hover {
+        background: rgba(241, 144, 34, 0.08) !important;
+        color: #f19022 !important;
+        border-color: #f19022 !important;
+    }
+    .dark-style .btn-outline-primary {
+        color: #ee9b00 !important;
+        border-color: #ee9b00 !important;
+    }
+    .dark-style .btn-outline-primary:hover {
+        background: rgba(238, 155, 0, 0.08) !important;
+        color: #ee9b00 !important;
+        border-color: #ee9b00 !important;
+    }
+    
+    /* Text primary */
+    .text-primary {
+        color: #f19022 !important;
+    }
+    .dark-style .text-primary {
+        color: #ee9b00 !important;
+    }
+    
+    /* Labels */
+    .bg-label-primary {
+        background-color: rgba(241, 144, 34, 0.12) !important;
+        color: #f19022 !important;
+    }
+    .dark-style .bg-label-primary {
+        background-color: rgba(238, 155, 0, 0.15) !important;
+        color: #ee9b00 !important;
+    }
+
+    /* Cards and panels */
+    .card {
+        background-color: var(--app-surface) !important;
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--app-line) !important;
+        box-shadow: var(--app-shadow) !important;
+    }
+    
+    /* Sidebar / Menu background & active items */
+    .light-style .bg-menu-theme {
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(15px);
+        border-inline-end: 1px solid rgba(44, 48, 56, 0.08) !important;
+    }
+    .dark-style .bg-menu-theme {
+        background-color: rgba(25, 38, 66, 0.85) !important;
+        backdrop-filter: blur(15px);
+        border-inline-end: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+    .bg-menu-theme .menu-item.active > .menu-link:not(.menu-toggle) {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        color: #fff !important;
+        box-shadow: 0 8px 20px rgba(241, 144, 34, 0.2) !important;
+    }
+    .dark-style .bg-menu-theme .menu-item.active > .menu-link:not(.menu-toggle) {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 8px 20px rgba(238, 155, 0, 0.25) !important;
+    }
+    
+    /* Active menu item icon */
+    .menu-vertical .menu-item.active > .menu-link:not(.menu-toggle) i {
+        color: #fff !important;
+    }
+    
+    /* Forms and inputs */
+    .form-control, .form-select {
+        border-color: var(--app-line) !important;
+        color: var(--app-text) !important;
+    }
+    .light-style .form-control, .light-style .form-select {
+        background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .dark-style .form-control, .dark-style .form-select {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(241, 144, 34, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(241, 144, 34, 0.15) !important;
+    }
+    .dark-style .form-control:focus, .dark-style .form-select:focus {
+        border-color: rgba(238, 155, 0, 0.5) !important;
+        box-shadow: 0 0 0 3px rgba(238, 155, 0, 0.15) !important;
+    }
+    
+    /* Splash screen loader matching auth screen */
+    .app-splash {
+        background:
+            radial-gradient(circle at top right, rgba(241, 144, 34, 0.15), transparent 28%),
+            radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.1), transparent 26%),
+            linear-gradient(135deg, #fdfbf7 0%, #faf6f0 100%) !important;
+    }
+    .dark-style .app-splash {
+        background:
+            radial-gradient(circle at top right, rgba(187, 62, 3, 0.15), transparent 28%),
+            radial-gradient(circle at bottom left, rgba(36, 123, 160, 0.12), transparent 26%),
+            linear-gradient(135deg, #152241 0%, #0c1426 100%) !important;
+    }
+    
+    .app-splash-logo {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        box-shadow: 0 14px 30px rgba(241, 144, 34, 0.25) !important;
+    }
+    .dark-style .app-splash-logo {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 14px 30px rgba(238, 155, 0, 0.25) !important;
+    }
+
+    /* Page list active pagination */
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        border-color: transparent !important;
+        box-shadow: 0 4px 10px rgba(241, 144, 34, 0.2) !important;
+        color: #fff !important;
+    }
+    .dark-style .page-item.active .page-link {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 4px 10px rgba(238, 155, 0, 0.25) !important;
+    }
+
+    /* Nav pills active list items */
+    .nav-pills .nav-link.active {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        color: #fff !important;
+        box-shadow: 0 4px 10px rgba(241, 144, 34, 0.2) !important;
+    }
+    .dark-style .nav-pills .nav-link.active {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+        box-shadow: 0 4px 10px rgba(238, 155, 0, 0.25) !important;
+    }
+
+    /* Theme toggle header element */
+    .theme-toggle-btn {
+        transition: transform 0.2s ease, opacity 0.2s ease !important;
+    }
+    .theme-toggle-btn:hover {
+        transform: scale(1.1) rotate(12deg);
+        color: #f19022 !important;
+    }
+    .dark-style .theme-toggle-btn:hover {
+        color: #ee9b00 !important;
+    }
+
+    /* QW UI Component Styles Overrides for System-wide Themes */
+    .qw-card,
+    .qw-stat,
+    .qw-quick-action,
+    .qw-detail {
+        background: var(--app-surface) !important;
+        background-color: var(--app-surface) !important;
+        border: 1px solid var(--app-line) !important;
+        box-shadow: var(--app-shadow) !important;
+        color: var(--app-text) !important;
+    }
+
+    .light-style .qw-hero {
+        background: linear-gradient(135deg, #f19022 0%, #fbc875 100%) !important;
+        box-shadow: 0 22px 50px rgba(241, 144, 34, .2) !important;
+    }
+    .dark-style .qw-hero {
+        background: linear-gradient(135deg, #ee9b00 0%, #bb3e03 100%) !important;
+        box-shadow: 0 22px 50px rgba(238, 155, 0, .25) !important;
+    }
+
+    .qw-section-title i,
+    .qw-quick-action i {
+        background: var(--app-primary) !important;
+    }
+    .light-style .qw-section-title i,
+    .light-style .qw-quick-action i {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+    }
+    .dark-style .qw-section-title i,
+    .dark-style .qw-quick-action i {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+    }
+
+    .qw-table thead th {
+        background: rgba(241, 144, 34, 0.08) !important;
+        color: var(--app-text) !important;
+    }
+    .dark-style .qw-table thead th {
+        background: rgba(238, 155, 0, 0.1) !important;
+    }
+
+    .qw-table tbody td {
+        color: var(--app-text) !important;
+    }
+
+    .qw-section-title {
+        color: var(--app-text) !important;
+    }
+
+    .qw-stat .number {
+        color: var(--app-text) !important;
+    }
+    .qw-stat .label {
+        color: var(--app-muted) !important;
+    }
+    .qw-stat::before {
+        background: var(--app-primary) !important;
+    }
+    .light-style .qw-stat::before {
+        background: linear-gradient(180deg, #f19022, #fbc875) !important;
+    }
+    .dark-style .qw-stat::before {
+        background: linear-gradient(180deg, #ee9b00, #bb3e03) !important;
+    }
+
+    .qw-empty {
+        color: var(--app-muted) !important;
+    }
+
+    .qw-detail .label {
+        color: var(--app-muted) !important;
+    }
+    .qw-detail .value {
+        color: var(--app-text) !important;
+    }
+    .qw-detail {
+        border-color: var(--app-line) !important;
+    }
+
+    .qw-label {
+        color: var(--app-text) !important;
+    }
+
+    .qw-pagination .page-link {
+        background: rgba(241, 144, 34, 0.08) !important;
+        color: #f19022 !important;
+    }
+    .dark-style .qw-pagination .page-link {
+        background: rgba(238, 155, 0, 0.1) !important;
+        color: #ee9b00 !important;
+    }
+    .qw-pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #f19022, #fbc875) !important;
+        color: #fff !important;
+    }
+    .dark-style .qw-pagination .page-item.active .page-link {
+        background: linear-gradient(135deg, #ee9b00, #bb3e03) !important;
+    }
+
+    /* Robust Sidebar / Menu text color overrides */
+    .light-style .bg-menu-theme .menu-link {
+        color: #2c3038 !important;
+    }
+    .light-style .bg-menu-theme .menu-item:not(.active) > .menu-link:hover,
+    .light-style .bg-menu-theme .menu-item.open > .menu-link {
+        background-color: rgba(241, 144, 34, 0.08) !important;
+        color: #f19022 !important;
+    }
+    .light-style .bg-menu-theme .menu-item.open > .menu-link i,
+    .light-style .bg-menu-theme .menu-item:not(.active) > .menu-link:hover i {
+        color: #f19022 !important;
+    }
+    .light-style .bg-menu-theme .menu-link i,
+    .light-style .bg-menu-theme .menu-inner-shadow {
+        color: #7a828a !important;
+    }
+    .light-style .bg-menu-theme .menu-header {
+        color: #7a828a !important;
+    }
+
+    .dark-style .bg-menu-theme .menu-link {
+        color: rgba(255, 255, 255, 0.8) !important;
+    }
+    .dark-style .bg-menu-theme .menu-item:not(.active) > .menu-link:hover,
+    .dark-style .bg-menu-theme .menu-item.open > .menu-link {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        color: #ee9b00 !important;
+    }
+    .dark-style .bg-menu-theme .menu-item.open > .menu-link i,
+    .dark-style .bg-menu-theme .menu-item:not(.active) > .menu-link:hover i {
+        color: #ee9b00 !important;
+    }
+    .dark-style .bg-menu-theme .menu-link i {
+        color: rgba(255, 255, 255, 0.6) !important;
+    }
+    .dark-style .bg-menu-theme .menu-header {
+        color: rgba(255, 255, 255, 0.5) !important;
     }
 </style>
